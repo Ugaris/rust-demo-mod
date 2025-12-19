@@ -3,26 +3,26 @@
   "version": "1.0.0",
   "description": "A native mod written in Rust demonstrating the Ugaris Client mod API with memory safety and zero-cost abstractions.",
   "author": "Ugaris Team",
-  "authorUrl": "https://github.com/ugaris",
+  "authorUrl": "https://github.com/Ugaris",
   "type": "dll",
   "files": [
     {
       "name": "bmod.dll",
-      "path": "https://github.com/ugaris/ugaris-rust-demo-mod/releases/download/v1.0.0/bmod.dll",
+      "path": "https://github.com/Ugaris/rust-demo-mod/releases/download/v1.0.0/bmod.dll",
       "platform": "windows"
     },
     {
       "name": "bmod.dylib",
-      "path": "https://github.com/ugaris/ugaris-rust-demo-mod/releases/download/v1.0.0/bmod.dylib",
+      "path": "https://github.com/Ugaris/rust-demo-mod/releases/download/v1.0.0/bmod.dylib",
       "platform": "macos"
     },
     {
       "name": "bmod.so",
-      "path": "https://github.com/ugaris/ugaris-rust-demo-mod/releases/download/v1.0.0/bmod.so",
+      "path": "https://github.com/Ugaris/rust-demo-mod/releases/download/v1.0.0/bmod.so",
       "platform": "linux"
     }
   ],
   "tags": ["demo", "rust", "native", "example"],
-  "homepage": "https://github.com/ugaris/ugaris-rust-demo-mod",
+  "homepage": "https://github.com/Ugaris/rust-demo-mod",
   "branch": "main"
 }
