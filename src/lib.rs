@@ -8,7 +8,7 @@
 //!   #stats   - Show current HP/Mana/Gold
 //!   #overlay - Toggle a simple HUD overlay
 
-use std::ffi::{c_char, c_int, c_uint, CStr};
+use std::ffi::{c_char, c_int, CStr};
 use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
 
 // ============================================================================

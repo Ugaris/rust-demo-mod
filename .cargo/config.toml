@@ -1,0 +1,18 @@
+# Allow undefined symbols - they will be resolved at runtime by the host application
+
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "link-args=-undefined dynamic_lookup"]
+
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "link-args=-undefined dynamic_lookup"]
+
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "link-args=-Wl,--allow-shlib-undefined"]
+
+# Windows with MSVC - use /FORCE:UNRESOLVED
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "link-args=/FORCE:UNRESOLVED"]
+
+# Windows with GNU toolchain
+[target.x86_64-pc-windows-gnu]
+rustflags = ["-C", "link-args=-Wl,--allow-shlib-undefined"]
