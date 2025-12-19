@@ -1,0 +1,18 @@
+[package]
+name = "ugaris-rust-demo-mod"
+version = "1.0.0"
+edition = "2021"
+authors = ["Ugaris Team"]
+description = "A Rust demo mod for the Ugaris Client"
+license = "MIT"
+
+[lib]
+name = "bmod"
+crate-type = ["cdylib"]
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true
