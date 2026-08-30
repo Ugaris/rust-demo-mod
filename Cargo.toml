@@ -1,6 +1,6 @@
 [package]
 name = "ugaris-rust-demo-mod"
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 authors = ["Ugaris Team"]
 description = "A Rust demo mod for the Ugaris Client"
