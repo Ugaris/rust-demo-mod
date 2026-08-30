@@ -50,11 +50,12 @@ extern "C" {
     fn exp2level(val: c_int) -> c_int;
 
     // Game state (imported globals)
-    static hp: c_int;
-    static mana: c_int;
-    static gold: c_int;
-    static experience: c_int;
-    static value: [[c_int; V_MAX]; 2];
+    // Current client types: stats and value[] are 16-bit, exp/gold u32.
+    static hp: u16;
+    static mana: u16;
+    static gold: u32;
+    static experience: u32;
+    static value: [[u16; V_MAX]; 2];
     static username: [c_char; 40];
 
     // Colors
@@ -216,7 +217,7 @@ pub extern "C" fn amod_client_cmd(buf: *const c_char) -> c_int {
                 1
             }
             "#stats" => {
-                let level = exp2level(experience);
+                let level = exp2level(experience as c_int);
                 addline(cstr!("=== Player Stats (from Rust) ==="));
 
                 let level_text = format!("Level: {}  Experience: {}\0", level, experience);
