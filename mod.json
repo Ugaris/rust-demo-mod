@@ -7,22 +7,23 @@
   "type": "dll",
   "files": [
     {
-      "name": "bmod.dll",
+      "name": "rust_demo_mod.dll",
       "path": "https://github.com/Ugaris/rust-demo-mod/releases/download/v1.0.1/bmod.dll",
       "platform": "windows"
     },
     {
-      "name": "bmod.dylib",
+      "name": "rust_demo_mod.dylib",
       "path": "https://github.com/Ugaris/rust-demo-mod/releases/download/v1.0.1/bmod.dylib",
       "platform": "macos"
     },
     {
-      "name": "bmod.so",
+      "name": "rust_demo_mod.so",
       "path": "https://github.com/Ugaris/rust-demo-mod/releases/download/v1.0.1/bmod.so",
       "platform": "linux"
     }
   ],
   "tags": ["demo", "rust", "native", "example"],
+  "entry": "rust_demo_mod",
   "homepage": "https://github.com/Ugaris/rust-demo-mod",
   "branch": "main"
 }

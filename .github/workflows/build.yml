@@ -12,17 +12,17 @@ jobs:
         include:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
-            artifact: bmod.dll
+            artifact: rust_demo_mod.dll
             platform: windows
           - os: macos-latest
             target: x86_64-apple-darwin
-            artifact: libbmod.dylib
-            output: bmod.dylib
+            artifact: librust_demo_mod.dylib
+            output: rust_demo_mod.dylib
             platform: macos
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            artifact: libbmod.so
-            output: bmod.so
+            artifact: librust_demo_mod.so
+            output: rust_demo_mod.so
             platform: linux
 
     runs-on: ${{ matrix.os }}
@@ -82,15 +82,15 @@ jobs:
         run: |
           cargo build --release --target x86_64-apple-darwin
           lipo -create \
-            target/x86_64-apple-darwin/release/libbmod.dylib \
-            target/aarch64-apple-darwin/release/libbmod.dylib \
-            -output bmod.dylib
+            target/x86_64-apple-darwin/release/librust_demo_mod.dylib \
+            target/aarch64-apple-darwin/release/librust_demo_mod.dylib \
+            -output rust_demo_mod.dylib
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos-universal
-          path: bmod.dylib
+          path: rust_demo_mod.dylib
 
   release:
     needs: [build, build-macos-arm]
@@ -109,16 +109,16 @@ jobs:
       - name: Organize release files
         run: |
           mkdir -p release
-          cp artifacts/windows/bmod.dll release/
-          cp artifacts/macos-universal/bmod.dylib release/
-          cp artifacts/linux/bmod.so release/
+          cp artifacts/windows/rust_demo_mod.dll release/
+          cp artifacts/macos-universal/rust_demo_mod.dylib release/
+          cp artifacts/linux/rust_demo_mod.so release/
           ls -la release/
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            release/bmod.dll
-            release/bmod.dylib
-            release/bmod.so
+            release/rust_demo_mod.dll
+            release/rust_demo_mod.dylib
+            release/rust_demo_mod.so
           generate_release_notes: true
