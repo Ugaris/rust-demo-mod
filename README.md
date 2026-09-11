@@ -50,9 +50,9 @@ cargo build --release --target x86_64-unknown-linux-gnu
 
 ### Output Locations
 
-- Windows: `target/release/bmod.dll`
-- macOS: `target/release/libbmod.dylib` (rename to `bmod.dylib`)
-- Linux: `target/release/libbmod.so` (rename to `bmod.so`)
+- Windows: `target/release/rust_demo_mod.dll`
+- macOS: `target/release/librust_demo_mod.dylib` (rename to `rust_demo_mod.dylib`)
+- Linux: `target/release/librust_demo_mod.so` (rename to `rust_demo_mod.so`)
 
 ## Project Structure
 

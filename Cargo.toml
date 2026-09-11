@@ -7,7 +7,7 @@ description = "A Rust demo mod for the Ugaris Client"
 license = "MIT"
 
 [lib]
-name = "bmod"
+name = "rust_demo_mod"
 crate-type = ["cdylib"]
 
 [dependencies]
