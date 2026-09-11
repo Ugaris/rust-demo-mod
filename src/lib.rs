@@ -93,6 +93,74 @@ fn get_username() -> String {
 // Mod Callbacks
 // ============================================================================
 
+/// Settings in Options > Mods.
+///
+/// `struct amod_option` is deliberately layout-frozen on the client side (see
+/// `amod_options.h`), which is what makes this `#[repr(C)]` mirror safe across
+/// client/mod version mixes: four `c_int`s then a 48-byte label.
+#[repr(C)]
+pub struct AmodOption {
+    pub opt_type: c_int,
+    pub value: c_int,
+    pub min_val: c_int,
+    pub max_val: c_int,
+    pub label: [c_char; 48],
+}
+
+const AMOD_OPT_HEADER: c_int = 0;
+const AMOD_OPT_TOGGLE: c_int = 1;
+
+/// Copy a label in, NUL-terminated and truncated rather than overrunning.
+fn set_label(out: &mut AmodOption, text: &str) {
+    let bytes = text.as_bytes();
+    let n = bytes.len().min(out.label.len() - 1);
+    for (slot, b) in out.label.iter_mut().zip(&bytes[..n]) {
+        *slot = *b as c_char;
+    }
+    out.label[n] = 0;
+}
+
+#[no_mangle]
+pub extern "C" fn amod_options_count() -> c_int {
+    2
+}
+
+/// # Safety
+/// `out` is a valid `struct amod_option` supplied by the client.
+#[no_mangle]
+pub unsafe extern "C" fn amod_option_get(index: c_int, out: *mut AmodOption) -> c_int {
+    if out.is_null() {
+        return 0;
+    }
+    let out = &mut *out;
+    out.value = 0;
+    out.min_val = 0;
+    out.max_val = 0;
+    out.label = [0; 48];
+
+    match index {
+        0 => {
+            out.opt_type = AMOD_OPT_HEADER;
+            set_label(out, "Rust Demo");
+            1
+        }
+        1 => {
+            out.opt_type = AMOD_OPT_TOGGLE;
+            out.value = i32::from(SHOW_OVERLAY.load(Ordering::Relaxed));
+            set_label(out, "Show overlay");
+            1
+        }
+        _ => 0,
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn amod_option_set(index: c_int, new_value: c_int) {
+    if index == 1 {
+        SHOW_OVERLAY.store(new_value != 0, Ordering::Relaxed);
+    }
+}
+
 #[no_mangle]
 pub extern "C" fn amod_version() -> *const c_char {
     cstr!("Rust Demo Mod 1.0.0")
